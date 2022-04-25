@@ -8,15 +8,15 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
 WORKDIR /src
 
-#COPY ["EngiePowerPlantTest.csproj", "."]
-#RUN dotnet restore "EngiePowerPlantTest.csproj"
-#COPY . .
-#WORKDIR "/src/"
-
-COPY ["EngiePowerPlantTest/EngiePowerPlantTest.csproj", "EngiePowerPlantTest/"]
-RUN dotnet restore "EngiePowerPlantTest/EngiePowerPlantTest.csproj"
+COPY ["EngiePowerPlantTest.csproj", "."]
+RUN dotnet restore "EngiePowerPlantTest.csproj"
 COPY . .
-WORKDIR "/src/EngiePowerPlantTest"
+WORKDIR "/src/"
+
+#COPY ["EngiePowerPlantTest/EngiePowerPlantTest.csproj", "EngiePowerPlantTest/"]
+#RUN dotnet restore "EngiePowerPlantTest/EngiePowerPlantTest.csproj"
+#COPY . .
+#WORKDIR "/src/EngiePowerPlantTest"
 
 RUN dotnet build "EngiePowerPlantTest.csproj" -c Release -o /app/build
 
